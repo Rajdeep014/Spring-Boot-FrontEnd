@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from "react"; // Import useState and useEffect
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 
-// ProtectedRoute component
 const ProtectedRoute = ({ element, user }) => {
   return user ? element : <Navigate to="/login" />;
 };
 
 const App = () => {
-  const [user, setUser] = useState(null); // Initialize user state
-
+  const [user, setUser] = useState(null);
   useEffect(() => {
-    // Check if token exists in localStorage
     const token = localStorage.getItem("token");
     if (token) {
-      // Here you might want to validate the token or fetch user details
-      setUser(true); // Set user to true if token is valid
+      setUser(true);
     } else {
-      setUser(false); // No token means no user
+      setUser(false);
     }
   }, []);
 

@@ -3,40 +3,37 @@ import React, { useEffect, useState } from "react";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(""); // Error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // Fetch users from the API
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("token"); // Retrieve the token
-      console.log(token); // Log the token to see if it's correctly retrieved
+      const token = localStorage.getItem("token");
+      console.log(token);
       const response = await axios.get("http://localhost:8080/api/auth/users", {
         headers: {
-          Authorization: `Bearer ${token}`, // Include the JWT in the Authorization header
+          Authorization: `Bearer ${token}`,
         },
       });
-      setUsers(response.data); // Set the users state with the fetched data
+      setUsers(response.data);
     } catch (err) {
-      setError("Error fetching users"); // Set error message if fetching fails
-      console.error(err); // Log the error for debugging
+      setError("Error fetching users");
+      console.error(err);
     } finally {
-      setLoading(false); // Set loading to false once done
+      setLoading(false);
     }
   };
 
-  // UseEffect to fetch users when component mounts
   useEffect(() => {
-    fetchUsers(); // Call the fetchUsers function
+    fetchUsers();
   }, []);
 
   const LogoutHandler = () => {
     console.log("Logout");
-    localStorage.removeItem("token"); // Remove the token
-    window.location.href = "/login"; // Redirect to login page
+    localStorage.removeItem("token");
+    window.location.href = "/login";
   };
 
-  // Render loading state or error if applicable
   if (loading) {
     return <div className="text-center">Loading...</div>;
   }

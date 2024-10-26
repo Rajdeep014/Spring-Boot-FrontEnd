@@ -1,6 +1,5 @@
-import axios from "axios"; // Import axios for API requests
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,7 +9,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const signupHandler = async (e) => {
     e.preventDefault();
@@ -25,10 +24,9 @@ const Login = () => {
         }
       );
       toast.success("Signed up successfully!");
-      setIsSignup(false); // Switch to login view after signup
+      setIsSignup(false);
     } catch (error) {
       toast.error("Signup failed. Please try again.");
-      console.error(error); // Log the error for debugging
     }
   };
 
@@ -42,12 +40,10 @@ const Login = () => {
           password,
         }
       );
-      console.log(response.data); // Check the structure of the response
-      localStorage.setItem("token", response.data.token); // Store the JWT token
+      localStorage.setItem("token", response.data.token);
       toast.success("Logged in successfully!");
-      navigate("/"); // Navigate to the home page after successful login
+      navigate("/");
     } catch (error) {
-      console.error(error); // Log the error for debugging
       toast.error("Login failed. Please check your credentials.");
     }
   };
