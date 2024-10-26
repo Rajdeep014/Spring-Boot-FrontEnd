@@ -1,4 +1,4 @@
-import axios from "axios"; // Make sure to import axios
+import axios from "axios"; 
 import React, { useEffect, useState } from "react";
 
 const Home = () => {
